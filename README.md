@@ -1,10 +1,9 @@
 # print9
 
-An upgraded, drop-in replacement for Python's `print` with:
+An upgraded, drop-in replacement for Python's `print`.
 
-- Line wrapping via `wrap` (per-object wrapping at a given width)
-- ANSI coloring via `color` (predefined names or custom ANSI codes)
-- Full compatibility — forwards standard `print()` kwargs like `sep`, `end`, `file`, `flush`
+- New functionalities: `wrap`, `color`.
+- Fully compatible with all existing `print()` kwargs (`sep`, `end`, `file`, `flush`).
 
 ## Installation
 
@@ -18,7 +17,7 @@ pip install print9
 from print9 import print9
 
 # Use both wrap and color
-print9("Hello, world! This line will be wrapped and colored.", wrap=40, color="green")
+print9("Hello, world!", wrap=80, color="blue")
 ```
 
 ## New Parameters
