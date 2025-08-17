@@ -59,47 +59,38 @@ def _process_color(
         ansi_reset = ANSI_COLORS["reset"]
     return ansi_color, ansi_reset
 
-print()
-
 def print9(
-    *objects: Any,
+    *values: Any,
     wrap: Optional[int] = None,
     color: Optional[Union[PredefinedColor, str]] = None,
     **kwargs,
 ) -> None:
     """
-    Prints the values to a stream, or to sys.stdout by default.
-    New features: wrap text and terminal color.
+    Prints the values to a stream, or to sys.stdout by default, with optional *text wrapping* and *terminal color*.
+    
+    wrap
+      maximum width to wrap each value's lines.
+    color
+      text color, can be a predefined name or a custom ANSI color code.
+      Predefined: black, red, green, yellow, blue, magenta, cyan, white, orange, purple, pink, brown, gray.
 
-    New parameters
-    --------------
-    wrap : int, optional
-        Maximum width to wrap each object's lines. If None or <= 0, no wrapping.
-    color : str, optional
-        Text color. Can be a predefined name or a custom ANSI color code.
-        Predefined colors:
-            black, red, green, yellow, blue, magenta, cyan, white,
-            orange, purple, pink, brown, gray
-
-    Native print parameters (passed via **kwargs)
-    ---------------------------------------------
-    sep : str, optional
-        String inserted between values, default a space.
-    end : str, optional
-        String appended after the last value, default a newline.
-    file : file-like object, optional
-        A file-like object (stream); defaults to the current sys.stdout.
-    flush : bool, optional
-        Whether to forcibly flush the stream.
+    sep
+      string inserted between values, default a space.
+    end
+      string appended after the last value, default a newline.
+    file
+      a file-like object (stream); defaults to the current sys.stdout.
+    flush
+      whether to forcibly flush the stream.
     """
     ansi_color, ansi_reset = _process_color(color)
-    processed_objects: List[str] = []
+    processed_values: List[str] = []
 
-    for object_item in objects:
-        object_string = str(object_item)
-        wrapped_object_string = _wrap_text(object_string, wrap)
-        processed_objects.append(
-            f"{ansi_color}{wrapped_object_string}{ansi_reset}"
+    for value_item in values:
+        value_string = str(value_item)
+        wrapped_value_string = _wrap_text(value_string, wrap)
+        processed_values.append(
+            f"{ansi_color}{wrapped_value_string}{ansi_reset}"
         )
 
-    print(*processed_objects, **kwargs)
+    print(*processed_values, **kwargs)
